@@ -2,7 +2,6 @@
 #include "calendar.h"
 #include <QPushButton>
 #include <QString>
-#include <QDebug>
 
 CalendarWidget::CalendarWidget(QWidget *parent): QWidget(parent)
 {
@@ -12,7 +11,6 @@ CalendarWidget::CalendarWidget(QWidget *parent): QWidget(parent)
 
     m_month = new Month;
     m_calendar = new Calendar;
-    m_bookingManager = new BookingManager;
 
     m_currentYear = m_calendar->getCurrentYear();
     m_currentMonth = m_calendar->getCurrentMonth();
@@ -46,11 +44,12 @@ void CalendarWidget::setupUI()
 
     QPushButton *rightArrow = new QPushButton(">", this);
     rightArrow->setGeometry(490, startY, 40, 30);
-    connect(rightArrow, &QPushButton::clicked, this, &CalendarWidget::goToNextMonth);
 
+    connect(rightArrow, &QPushButton::clicked, this, &CalendarWidget::goToNextMonth);
 
     m_monthTitle = new QPushButton(this);
     m_monthTitle->setGeometry(300, startY, 180, 30);
+
     m_monthTitle->setEnabled(false);
 
 
@@ -65,25 +64,18 @@ void CalendarWidget::setupUI()
 
     for (int i = 0; i < 42; ++i)
     {
-        //m_dayButtons[i] = new QPushButton(this);
         m_dayButtons[i] = new QPushButton(this);
-        connect(m_dayButtons[i], &QPushButton::clicked, this, [=]() {
-            int day = m_dayButtons[i]->text().toInt();
-            if (day > 0) {
-                onDayClicked(day);
-            }
-        });
-
         m_dayButtons[i]->setGeometry(startX + (i % 7) * 90, startY + 80 + (i / 7) * 40, 85, 30);
+
     }
 
 
     m_currentDateDisplay = new QPushButton(this);
     m_currentDateDisplay->setGeometry(210, 380, 350, 30);
+
     m_currentDateDisplay->setEnabled(false);
 
 }
-
 
 void CalendarWidget::refreshCalendar()
 {
@@ -111,7 +103,6 @@ void CalendarWidget::refreshCalendar()
         m_dayButtons[index]->setText(number);
         m_dayButtons[index]->show();
     }
-
 }
 
 void CalendarWidget::goToPreviousMonth()
@@ -134,4 +125,3 @@ void CalendarWidget::goToNextMonth()
     }
     refreshCalendar();
 }
-
