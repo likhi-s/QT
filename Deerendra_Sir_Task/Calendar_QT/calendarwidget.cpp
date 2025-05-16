@@ -56,7 +56,6 @@ void CalendarWidget::setupUI()
     const char *days[] = { "Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat" };
     for (int i = 0; i < 7; ++i)
     {
-
         QPushButton *button = new QPushButton(days[i], this);
         button->setGeometry(startX + i * 90, startY + 40, 85, 30);
         button->setEnabled(false);
@@ -66,7 +65,6 @@ void CalendarWidget::setupUI()
     {
         m_dayButtons[i] = new QPushButton(this);
         m_dayButtons[i]->setGeometry(startX + (i % 7) * 90, startY + 80 + (i / 7) * 40, 85, 30);
-
     }
 
 
